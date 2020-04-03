@@ -1,4 +1,4 @@
-# flutterplatformloadable
+# flutter-platform-loadable
 
 A new Flutter package project.
 
