@@ -78,7 +78,6 @@ class LoadableListState<T extends StoreListItem> extends State<LoadableList>
 }
 
 class LoadableListViewModel<Item extends StoreListItem> {
-
   const LoadableListViewModel({
     @required this.itemBuilder,
     @required this.items,
@@ -94,7 +93,7 @@ class LoadableListViewModel<Item extends StoreListItem> {
   final Widget errorWidget;
   final Widget emptyStateWidget;
   final Widget Function(int) itemBuilder;
-  final void Function() loadList;
+  final VoidCallback loadList;
   final EdgeInsets padding;
   final StoreList<Item> items;
   final RefreshableRequestState loadListRequestState;
@@ -102,13 +101,11 @@ class LoadableListViewModel<Item extends StoreListItem> {
   int get itemsCount => items.items.length;
 
   PaginationState getPaginationState() {
-    final itemsCount = items.items.length;
-
     if (loadListRequestState.isFailed) {
       return PaginationState.error;
     } else if (loadListRequestState.isInProgress) {
       return PaginationState.loading;
-    } else if (loadListRequestState.isSucceed && itemsCount == 0) {
+    } else if (loadListRequestState.isSucceed && items.items.isEmpty) {
       return PaginationState.empty;
     }
 
