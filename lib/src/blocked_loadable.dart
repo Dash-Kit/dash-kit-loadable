@@ -5,7 +5,8 @@ class BlockedLoadable extends StatelessWidget {
     @required this.child,
     @required this.isLoading,
     this.indicatorColor = Colors.white,
-  });
+  })  : assert(child != null),
+        assert(isLoading != null);
 
   final Widget child;
   final bool isLoading;

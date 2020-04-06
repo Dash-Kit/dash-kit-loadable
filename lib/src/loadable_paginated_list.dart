@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_core/flutter_platform_core.dart';
-import 'package:flutter_platform_loadable/loadable_list.dart';
+import 'package:flutter_platform_loadable/src/loadable_list.dart';
 
 class LoadablePaginatedList<T extends StoreListItem> extends LoadableList<T> {
   const LoadablePaginatedList({
@@ -84,7 +84,7 @@ class LoadablePaginatedListViewModel<Item extends StoreListItem>
     Widget errorWidget,
     Widget emptyStateWidget,
     Widget Function(int) itemBuilder,
-    void Function() loadList,
+    VoidCallback loadList,
     EdgeInsets padding,
     @required this.paginatedList,
     this.errorPageWidget,
@@ -100,7 +100,7 @@ class LoadablePaginatedListViewModel<Item extends StoreListItem>
           padding: padding,
         );
 
-  final void Function() loadPage;
+  final VoidCallback loadPage;
   final PaginatedList<Item> paginatedList;
   final Widget errorPageWidget;
 

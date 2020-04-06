@@ -6,7 +6,8 @@ class Loadable extends StatelessWidget {
     @required this.isLoading,
     this.padding,
     this.backgroundColor = Colors.white,
-  });
+  })  : assert(child != null),
+        assert(isLoading != null);
 
   final Widget child;
   final bool isLoading;
