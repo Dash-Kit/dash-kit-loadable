@@ -14,7 +14,7 @@ dependencies:
   flutter_platform_core:
     git:
       url: git://github.com/mobile-dualbootpartners/flutter-platform-core
-      ref: v0.0.19
+      ref: v0.0.20
 
 dev_dependencies:
   flutter_test:
