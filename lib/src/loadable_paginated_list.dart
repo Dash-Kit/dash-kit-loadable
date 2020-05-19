@@ -81,6 +81,7 @@ class LoadablePaginatedListState<T extends StoreListItem>
 class LoadablePaginatedListViewModel<Item extends StoreListItem>
     extends LoadableListViewModel<Item> {
   LoadablePaginatedListViewModel({
+    Key key,
     Widget errorWidget,
     Widget emptyStateWidget,
     Widget Function(int) itemBuilder,
@@ -98,6 +99,7 @@ class LoadablePaginatedListViewModel<Item extends StoreListItem>
           errorWidget: errorWidget,
           emptyStateWidget: emptyStateWidget,
           padding: padding,
+          key: key,
         );
 
   final VoidCallback loadPage;

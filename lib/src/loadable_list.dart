@@ -14,8 +14,8 @@ class LoadableList<T extends StoreListItem> extends StatefulWidget {
 
 class LoadableListState<T extends StoreListItem> extends State<LoadableList>
     with ReduxState {
-
   final ScrollController scrollController = ScrollController();
+
   LoadableListViewModel<T> get viewModel => widget.viewModel;
 
   @override
@@ -42,6 +42,7 @@ class LoadableListState<T extends StoreListItem> extends State<LoadableList>
     }
 
     return ListView.builder(
+        key: viewModel.key,
         physics: const AlwaysScrollableScrollPhysics(),
         padding: viewModel.padding,
         itemCount: viewModel.itemsCount,
@@ -82,6 +83,7 @@ class LoadableListViewModel<Item extends StoreListItem> {
     @required this.itemBuilder,
     @required this.items,
     @required this.loadListRequestState,
+    this.key,
     this.errorWidget,
     this.emptyStateWidget,
     this.loadList,
@@ -90,6 +92,7 @@ class LoadableListViewModel<Item extends StoreListItem> {
         assert(itemBuilder != null),
         assert(loadListRequestState != null);
 
+  final Key key;
   final Widget errorWidget;
   final Widget emptyStateWidget;
   final Widget Function(int) itemBuilder;
