@@ -1,8 +1,8 @@
 name: flutter_platform_loadable
-description: A new Flutter package project.
-version: 0.0.3
+description: Widget for viewing load state
+version: 0.0.4
 author:
-homepage:
+homepage: https://github.com/Cash-Flow-Team/flutter-platform-loadable
 
 environment:
   sdk: ">=2.1.0 <3.0.0"
@@ -13,7 +13,7 @@ dependencies:
 
   flutter_platform_core:
     git:
-      url: git://github.com/mobile-dualbootpartners/flutter-platform-core
+      url: git://github.com/Cash-Flow-Team/flutter-platform-core
       ref: v0.0.21
 
 dev_dependencies:

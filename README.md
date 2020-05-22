@@ -1,6 +1,6 @@
 # flutter-platform-loadable
 
-A new Flutter package project.
+Widget for viewing load state
 
 ## Getting Started
 
