@@ -14,7 +14,7 @@ dependencies:
   flutter_platform_core:
     git:
       url: git://github.com/Cash-Flow-Team/flutter-platform-core
-      ref: v0.0.21
+      ref: v0.0.22
 
 dev_dependencies:
   flutter_test:
