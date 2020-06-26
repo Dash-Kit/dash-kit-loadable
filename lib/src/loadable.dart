@@ -6,6 +6,7 @@ class Loadable extends StatelessWidget {
     @required this.isLoading,
     this.padding,
     this.backgroundColor = Colors.white,
+    this.indicatorColor,
   })  : assert(child != null),
         assert(isLoading != null);
 
@@ -13,6 +14,7 @@ class Loadable extends StatelessWidget {
   final bool isLoading;
   final EdgeInsetsGeometry padding;
   final Color backgroundColor;
+  final Animation<Color> indicatorColor;
 
   @override
   Widget build(BuildContext context) {
@@ -30,8 +32,10 @@ class Loadable extends StatelessWidget {
       child: Container(
         padding: padding,
         color: backgroundColor,
-        child: const Center(
-          child: CircularProgressIndicator(),
+        child: Center(
+          child: CircularProgressIndicator(
+            valueColor: indicatorColor,
+          ),
         ),
       ),
     );
