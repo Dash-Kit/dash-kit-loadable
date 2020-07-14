@@ -82,13 +82,13 @@ class LoadablePaginatedListViewModel<Item extends StoreListItem>
     extends LoadableListViewModel<Item> {
   LoadablePaginatedListViewModel({
     Key key,
-    Widget errorWidget,
-    Widget emptyStateWidget,
-    Widget Function(int) itemBuilder,
+    @required Widget errorWidget,
+    @required Widget emptyStateWidget,
+    @required Widget Function(int) itemBuilder,
+    @required this.paginatedList,
+    @required this.errorPageWidget,
     VoidCallback loadList,
     EdgeInsets padding,
-    @required this.paginatedList,
-    this.errorPageWidget,
     this.loadPage,
   })  : assert(paginatedList != null),
         super(
