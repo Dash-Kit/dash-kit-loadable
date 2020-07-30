@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_platform_core/flutter_platform_core.dart';
-import 'package:flutter_platform_loadable/src/loadable_list.dart';
+import 'package:dash_kit_core/dash_kit_core.dart';
+import 'package:dash_kit_loadable/src/loadable_list.dart';
 
 class LoadablePaginatedList<T extends StoreListItem> extends LoadableList<T> {
   const LoadablePaginatedList({

@@ -72,3 +72,6 @@ local.properties
 !/packages/flutter_tools/test/data/dart_dependencies_test/**/.packages
 
 ios/Flutter/flutter_export_environment.sh
+
+# Default ignored files
+/workspace.xml

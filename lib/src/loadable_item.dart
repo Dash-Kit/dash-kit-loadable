@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_platform_core/flutter_platform_core.dart';
+import 'package:dash_kit_core/dash_kit_core.dart';
 
 class LoadableItem extends StatelessWidget {
   const LoadableItem({
