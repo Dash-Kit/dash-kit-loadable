@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:dash_kit_core/dash_kit_core.dart';
-import 'package:dash_kit_loadable/src/loadable_list.dart';
+import 'package:dash_kit_loadable/src/loadable_list_view.dart';
 
-class LoadablePaginatedList<T extends StoreListItem> extends LoadableList<T> {
-  const LoadablePaginatedList({
+class LoadablePaginatedListView<T extends StoreListItem>
+    extends LoadableListView<T> {
+  const LoadablePaginatedListView({
     Key key,
     @required LoadablePaginatedListViewModel<T> viewModel,
   }) : super(key: key, viewModel: viewModel);
@@ -15,7 +16,7 @@ class LoadablePaginatedList<T extends StoreListItem> extends LoadableList<T> {
 }
 
 class LoadablePaginatedListState<T extends StoreListItem>
-    extends LoadableListState<T> {
+    extends LoadableListViewState<T> {
   @override
   LoadablePaginatedListViewModel<T> get viewModel => widget.viewModel;
 

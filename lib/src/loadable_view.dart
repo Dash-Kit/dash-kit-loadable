@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class Loadable extends StatelessWidget {
-  const Loadable({
+class LoadableView extends StatelessWidget {
+  const LoadableView({
     @required this.child,
     @required this.isLoading,
     this.padding,
