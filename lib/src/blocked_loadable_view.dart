@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class BlockedLoadable extends StatelessWidget {
-  const BlockedLoadable({
+class BlockedLoadableView extends StatelessWidget {
+  const BlockedLoadableView({
     @required this.child,
     @required this.isLoading,
     this.indicatorColor = Colors.white,

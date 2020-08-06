@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:dash_kit_core/dash_kit_core.dart';
 
-class LoadableItem extends StatelessWidget {
-  const LoadableItem({
+class LoadableItemView extends StatelessWidget {
+  const LoadableItemView({
     @required this.child,
     @required this.requestState,
     @required this.errorWidget,

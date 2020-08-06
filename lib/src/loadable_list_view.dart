@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:dash_kit_core/dash_kit_core.dart';
 
-class LoadableList<T extends StoreListItem> extends StatefulWidget {
-  const LoadableList({Key key, @required this.viewModel}) : super(key: key);
+class LoadableListView<T extends StoreListItem> extends StatefulWidget {
+  const LoadableListView({Key key, @required this.viewModel}) : super(key: key);
 
   final LoadableListViewModel<T> viewModel;
 
   @override
   State<StatefulWidget> createState() {
-    return LoadableListState<T>();
+    return LoadableListViewState<T>();
   }
 }
 
-class LoadableListState<T extends StoreListItem> extends State<LoadableList>
-    with ReduxState {
+class LoadableListViewState<T extends StoreListItem>
+    extends State<LoadableListView> with ReduxState {
   final ScrollController scrollController = ScrollController();
 
   LoadableListViewModel<T> get viewModel => widget.viewModel;
