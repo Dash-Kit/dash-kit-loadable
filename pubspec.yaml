@@ -1,6 +1,6 @@
 name: dash_kit_loadable
 description: Widgets for displaying different request states without additional code.
-version: 1.0.0
+version: 1.0.1
 homepage: https://github.com/Dash-Kit/dash-kit-loadable
 
 environment:
