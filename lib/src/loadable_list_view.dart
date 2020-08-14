@@ -2,9 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:dash_kit_core/dash_kit_core.dart';
 
 class LoadableListView<T extends StoreListItem> extends StatefulWidget {
-  const LoadableListView({Key key, @required this.viewModel}) : super(key: key);
+  const LoadableListView({
+    Key key,
+    @required this.viewModel,
+    this.scrollPhysics = const AlwaysScrollableScrollPhysics(),
+  }) : super(key: key);
 
   final LoadableListViewModel<T> viewModel;
+  final ScrollPhysics scrollPhysics;
 
   @override
   State<StatefulWidget> createState() {
@@ -43,7 +48,7 @@ class LoadableListViewState<T extends StoreListItem>
 
     return ListView.builder(
         key: viewModel.key,
-        physics: const AlwaysScrollableScrollPhysics(),
+        physics: widget.scrollPhysics,
         padding: viewModel.padding,
         itemCount: viewModel.itemsCount,
         controller: scrollController,
