@@ -6,10 +6,12 @@ class LoadableListView<T extends StoreListItem> extends StatefulWidget {
     Key key,
     @required this.viewModel,
     this.scrollPhysics = const AlwaysScrollableScrollPhysics(),
+    this.onChangeContentOffset,
   }) : super(key: key);
 
   final LoadableListViewModel<T> viewModel;
   final ScrollPhysics scrollPhysics;
+  final void Function(double offset) onChangeContentOffset;
 
   @override
   State<StatefulWidget> createState() {
@@ -19,6 +21,10 @@ class LoadableListView<T extends StoreListItem> extends StatefulWidget {
 
 class LoadableListViewState<T extends StoreListItem>
     extends State<LoadableListView> with ReduxState {
+  LoadableListViewState({this.onChangeContentOffset});
+
+  final void Function(double offset) onChangeContentOffset;
+
   final ScrollController scrollController = ScrollController();
 
   LoadableListViewModel<T> get viewModel => widget.viewModel;
@@ -29,6 +35,12 @@ class LoadableListViewState<T extends StoreListItem>
     if (viewModel?.loadList != null && viewModel.loadListRequestState.isIdle) {
       viewModel?.loadList();
     }
+
+    scrollController.addListener(() {
+      if (onChangeContentOffset != null) {
+        onChangeContentOffset(scrollController.position.pixels);
+      }
+    });
   }
 
   @override
