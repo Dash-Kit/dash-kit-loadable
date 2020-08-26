@@ -18,12 +18,18 @@ class LoadablePaginatedListView<T extends StoreListItem>
 
   @override
   State<StatefulWidget> createState() {
-    return LoadablePaginatedListState<T>();
+    return LoadablePaginatedListState<T>(
+      onChangeContentOffset: onChangeContentOffset,
+    );
   }
 }
 
 class LoadablePaginatedListState<T extends StoreListItem>
     extends LoadableListViewState<T> {
+  LoadablePaginatedListState({this.onChangeContentOffset});
+
+  final void Function(double offset) onChangeContentOffset;
+
   @override
   LoadablePaginatedListViewModel<T> get viewModel => widget.viewModel;
 
@@ -41,6 +47,8 @@ class LoadablePaginatedListState<T extends StoreListItem>
           canLoad) {
         viewModel?.loadPage();
       }
+
+      onChangeContentOffset?.call(scrollController.position.pixels);
     });
   }
 
