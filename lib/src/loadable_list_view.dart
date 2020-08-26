@@ -15,18 +15,12 @@ class LoadableListView<T extends StoreListItem> extends StatefulWidget {
 
   @override
   State<StatefulWidget> createState() {
-    return LoadableListViewState<T>(
-      onChangeContentOffset: onChangeContentOffset,
-    );
+    return LoadableListViewState<T>();
   }
 }
 
 class LoadableListViewState<T extends StoreListItem>
     extends State<LoadableListView> with ReduxState {
-  LoadableListViewState({this.onChangeContentOffset});
-
-  final void Function(double offset) onChangeContentOffset;
-
   final ScrollController scrollController = ScrollController();
 
   LoadableListViewModel<T> get viewModel => widget.viewModel;
@@ -39,7 +33,7 @@ class LoadableListViewState<T extends StoreListItem>
     }
 
     scrollController.addListener(() {
-      onChangeContentOffset?.call(scrollController.position.pixels);
+      widget.onChangeContentOffset?.call(scrollController.position.pixels);
     });
   }
 
