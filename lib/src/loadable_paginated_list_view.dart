@@ -8,7 +8,13 @@ class LoadablePaginatedListView<T extends StoreListItem>
     Key key,
     @required LoadablePaginatedListViewModel<T> viewModel,
     ScrollPhysics scrollPhysics = const AlwaysScrollableScrollPhysics(),
-  }) : super(key: key, viewModel: viewModel, scrollPhysics: scrollPhysics);
+    void Function(double offset) onChangeContentOffset,
+  }) : super(
+          key: key,
+          viewModel: viewModel,
+          scrollPhysics: scrollPhysics,
+          onChangeContentOffset: onChangeContentOffset,
+        );
 
   @override
   State<StatefulWidget> createState() {

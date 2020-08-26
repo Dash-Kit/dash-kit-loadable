@@ -1,3 +1,7 @@
+## [1.0.3]
+
+* Added observing list view content offset feature
+
 ## [1.0.2]
 
 * Updated dependencies

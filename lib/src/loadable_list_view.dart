@@ -6,10 +6,12 @@ class LoadableListView<T extends StoreListItem> extends StatefulWidget {
     Key key,
     @required this.viewModel,
     this.scrollPhysics = const AlwaysScrollableScrollPhysics(),
+    this.onChangeContentOffset,
   }) : super(key: key);
 
   final LoadableListViewModel<T> viewModel;
   final ScrollPhysics scrollPhysics;
+  final void Function(double offset) onChangeContentOffset;
 
   @override
   State<StatefulWidget> createState() {
@@ -29,6 +31,10 @@ class LoadableListViewState<T extends StoreListItem>
     if (viewModel?.loadList != null && viewModel.loadListRequestState.isIdle) {
       viewModel?.loadList();
     }
+
+    scrollController.addListener(() {
+      widget.onChangeContentOffset?.call(scrollController.position.pixels);
+    });
   }
 
   @override
@@ -54,6 +60,12 @@ class LoadableListViewState<T extends StoreListItem>
         controller: scrollController,
         cacheExtent: 1000000,
         itemBuilder: buildListItem);
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    scrollController.dispose();
   }
 
   Widget buildProgressState() {
