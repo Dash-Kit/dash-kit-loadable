@@ -15,7 +15,9 @@ class LoadableListView<T extends StoreListItem> extends StatefulWidget {
 
   @override
   State<StatefulWidget> createState() {
-    return LoadableListViewState<T>();
+    return LoadableListViewState<T>(
+      onChangeContentOffset: onChangeContentOffset,
+    );
   }
 }
 
