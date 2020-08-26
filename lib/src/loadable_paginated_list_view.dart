@@ -41,8 +41,6 @@ class LoadablePaginatedListState<T extends StoreListItem>
           canLoad) {
         viewModel?.loadPage();
       }
-
-      widget.onChangeContentOffset?.call(scrollController.position.pixels);
     });
   }
 
