@@ -37,9 +37,7 @@ class LoadableListViewState<T extends StoreListItem>
     }
 
     scrollController.addListener(() {
-      if (onChangeContentOffset != null) {
-        onChangeContentOffset(scrollController.position.pixels);
-      }
+      onChangeContentOffset?.call(scrollController.position.pixels);
     });
   }
 
@@ -66,6 +64,12 @@ class LoadableListViewState<T extends StoreListItem>
         controller: scrollController,
         cacheExtent: 1000000,
         itemBuilder: buildListItem);
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    scrollController.dispose();
   }
 
   Widget buildProgressState() {
