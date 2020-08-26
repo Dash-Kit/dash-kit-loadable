@@ -1,3 +1,7 @@
+## [1.0.2]
+
+* Updated dependencies
+
 ## [1.0.1]
 
 * Refactored names of the widget. Added ability to change physics in lists
