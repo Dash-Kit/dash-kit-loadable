@@ -7,11 +7,13 @@ class LoadableListView<T extends StoreListItem> extends StatefulWidget {
     @required this.viewModel,
     this.scrollPhysics = const AlwaysScrollableScrollPhysics(),
     this.onChangeContentOffset,
+    this.cacheExtent,
   }) : super(key: key);
 
   final LoadableListViewModel<T> viewModel;
   final ScrollPhysics scrollPhysics;
   final void Function(double offset) onChangeContentOffset;
+  final double cacheExtent;
 
   @override
   State<StatefulWidget> createState() {
@@ -53,13 +55,14 @@ class LoadableListViewState<T extends StoreListItem>
     }
 
     return ListView.builder(
-        key: viewModel.key,
-        physics: widget.scrollPhysics,
-        padding: viewModel.padding,
-        itemCount: viewModel.itemsCount,
-        controller: scrollController,
-        cacheExtent: 1000000,
-        itemBuilder: buildListItem);
+      key: viewModel.key,
+      physics: widget.scrollPhysics,
+      padding: viewModel.padding,
+      itemCount: viewModel.itemsCount,
+      controller: scrollController,
+      cacheExtent: widget.cacheExtent,
+      itemBuilder: buildListItem,
+    );
   }
 
   @override
