@@ -10,7 +10,10 @@ dependencies:
   flutter:
     sdk: flutter
 
-  dash_kit_core: ^1.0.5
+  dash_kit_core:
+    git:
+      url: git://github.com/Dash-Kit/dash-kit-core
+      ref: asyc_redux
 
 dev_dependencies:
   flutter_test:
