@@ -13,7 +13,7 @@ dependencies:
   dash_kit_core:
     git:
       url: git://github.com/Dash-Kit/dash-kit-core
-      ref: asyc_redux
+      ref: async_redux
 
 dev_dependencies:
   flutter_test:
