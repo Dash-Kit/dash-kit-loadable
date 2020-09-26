@@ -119,16 +119,21 @@ class LoadableListViewModel<Item extends StoreListItem> {
   final VoidCallback loadList;
   final EdgeInsets padding;
   final StoreList<Item> items;
-  final RefreshableRequestState loadListRequestState;
+  final RequestState loadListRequestState;
 
   int get itemsCount => items.items.length;
 
   PaginationState getPaginationState() {
     if (loadListRequestState.isFailed) {
       return PaginationState.error;
-    } else if (loadListRequestState.isInProgress) {
+    }
+
+    if (loadListRequestState.isInProgress ||
+        loadListRequestState.isRefreshing) {
       return PaginationState.loading;
-    } else if (loadListRequestState.isSucceed && items.items.isEmpty) {
+    }
+
+    if (loadListRequestState.isSucceed && items.items.isEmpty) {
       return PaginationState.empty;
     }
 
