@@ -22,7 +22,7 @@ class LoadableListView<T extends StoreListItem> extends StatefulWidget {
 }
 
 class LoadableListViewState<T extends StoreListItem>
-    extends State<LoadableListView> with ReduxState {
+    extends State<LoadableListView> {
   final ScrollController scrollController = ScrollController();
 
   LoadableListViewModel<T> get viewModel => widget.viewModel;
@@ -119,7 +119,7 @@ class LoadableListViewModel<Item extends StoreListItem> {
   final VoidCallback loadList;
   final EdgeInsets padding;
   final StoreList<Item> items;
-  final RequestState loadListRequestState;
+  final OperationState loadListRequestState;
 
   int get itemsCount => items.items.length;
 
