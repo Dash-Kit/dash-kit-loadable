@@ -1,6 +1,6 @@
 name: dash_kit_loadable
 description: Widgets for displaying different request states without additional code.
-version: 1.0.3
+version: 2.0.0
 homepage: https://github.com/Dash-Kit/dash-kit-loadable
 
 environment:
@@ -10,8 +10,8 @@ dependencies:
   flutter:
     sdk: flutter
 
-  dash_kit_core: ^1.0.5
-
+  dash_kit_core: ^2.0.1
+    
 dev_dependencies:
   flutter_test:
     sdk: flutter

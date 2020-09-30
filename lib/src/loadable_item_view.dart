@@ -13,7 +13,7 @@ class LoadableItemView extends StatelessWidget {
 
   final Widget child;
   final Widget errorWidget;
-  final RequestState requestState;
+  final OperationState requestState;
   final EdgeInsetsGeometry padding;
   final Color backgroundColor;
 

@@ -7,11 +7,13 @@ class LoadableListView<T extends StoreListItem> extends StatefulWidget {
     @required this.viewModel,
     this.scrollPhysics = const AlwaysScrollableScrollPhysics(),
     this.onChangeContentOffset,
+    this.cacheExtent,
   }) : super(key: key);
 
   final LoadableListViewModel<T> viewModel;
   final ScrollPhysics scrollPhysics;
   final void Function(double offset) onChangeContentOffset;
+  final double cacheExtent;
 
   @override
   State<StatefulWidget> createState() {
@@ -20,7 +22,7 @@ class LoadableListView<T extends StoreListItem> extends StatefulWidget {
 }
 
 class LoadableListViewState<T extends StoreListItem>
-    extends State<LoadableListView> with ReduxState {
+    extends State<LoadableListView> {
   final ScrollController scrollController = ScrollController();
 
   LoadableListViewModel<T> get viewModel => widget.viewModel;
@@ -53,13 +55,14 @@ class LoadableListViewState<T extends StoreListItem>
     }
 
     return ListView.builder(
-        key: viewModel.key,
-        physics: widget.scrollPhysics,
-        padding: viewModel.padding,
-        itemCount: viewModel.itemsCount,
-        controller: scrollController,
-        cacheExtent: 1000000,
-        itemBuilder: buildListItem);
+      key: viewModel.key,
+      physics: widget.scrollPhysics,
+      padding: viewModel.padding,
+      itemCount: viewModel.itemsCount,
+      controller: scrollController,
+      cacheExtent: widget.cacheExtent,
+      itemBuilder: buildListItem,
+    );
   }
 
   @override
@@ -116,16 +119,21 @@ class LoadableListViewModel<Item extends StoreListItem> {
   final VoidCallback loadList;
   final EdgeInsets padding;
   final StoreList<Item> items;
-  final RefreshableRequestState loadListRequestState;
+  final OperationState loadListRequestState;
 
   int get itemsCount => items.items.length;
 
   PaginationState getPaginationState() {
     if (loadListRequestState.isFailed) {
       return PaginationState.error;
-    } else if (loadListRequestState.isInProgress) {
+    }
+
+    if (loadListRequestState.isInProgress ||
+        loadListRequestState.isRefreshing) {
       return PaginationState.loading;
-    } else if (loadListRequestState.isSucceed && items.items.isEmpty) {
+    }
+
+    if (loadListRequestState.isSucceed && items.items.isEmpty) {
       return PaginationState.empty;
     }
 
