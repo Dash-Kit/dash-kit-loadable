@@ -1,3 +1,7 @@
+## [2.0.0]
+
+* Integration of Dash Kit Core 2.0
+
 ## [1.0.4]
 
 * Added cacheExtent property
