@@ -1,3 +1,7 @@
+## [2.0.1]
+
+* Changed implementation of ListView to ListView.builder
+
 ## [2.0.0]
 
 * Integration of Dash Kit Core 2.0

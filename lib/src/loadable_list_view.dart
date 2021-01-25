@@ -54,7 +54,7 @@ class LoadableListViewState<T extends StoreListItem>
         break;
     }
 
-    return ListView.builder(
+    return ListView.separated(
       key: viewModel.key,
       physics: widget.scrollPhysics,
       padding: viewModel.padding,
@@ -62,6 +62,7 @@ class LoadableListViewState<T extends StoreListItem>
       controller: scrollController,
       cacheExtent: widget.cacheExtent,
       itemBuilder: buildListItem,
+      separatorBuilder: buildSeparator,
     );
   }
 
@@ -96,11 +97,16 @@ class LoadableListViewState<T extends StoreListItem>
   Widget buildListItem(BuildContext context, int index) {
     return viewModel.itemBuilder(index);
   }
+
+  Widget buildSeparator(BuildContext context, int index) {
+    return viewModel.itemSeparator(index);
+  }
 }
 
 class LoadableListViewModel<Item extends StoreListItem> {
   const LoadableListViewModel({
     @required this.itemBuilder,
+    @required this.itemSeparator,
     @required this.items,
     @required this.loadListRequestState,
     @required this.errorWidget,
@@ -110,12 +116,14 @@ class LoadableListViewModel<Item extends StoreListItem> {
     this.padding,
   })  : assert(items != null),
         assert(itemBuilder != null),
+        assert(itemSeparator != null),
         assert(loadListRequestState != null);
 
   final Key key;
   final Widget errorWidget;
   final Widget emptyStateWidget;
   final Widget Function(int) itemBuilder;
+  final Widget Function(int) itemSeparator;
   final VoidCallback loadList;
   final EdgeInsets padding;
   final StoreList<Item> items;
