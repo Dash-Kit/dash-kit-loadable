@@ -2,11 +2,10 @@ import 'package:flutter/material.dart';
 
 class BlockedLoadableView extends StatelessWidget {
   const BlockedLoadableView({
-    @required this.child,
-    @required this.isLoading,
+    required this.child,
+    required this.isLoading,
     this.indicatorColor = Colors.white,
-  })  : assert(child != null),
-        assert(isLoading != null);
+  });
 
   final Widget child;
   final bool isLoading;
