@@ -3,19 +3,18 @@ import 'package:dash_kit_core/dash_kit_core.dart';
 
 class LoadableItemView extends StatelessWidget {
   const LoadableItemView({
-    @required this.child,
-    @required this.requestState,
-    @required this.errorWidget,
+    required this.child,
+    required this.requestState,
+    required this.errorWidget,
     this.padding,
     this.backgroundColor,
-  })  : assert(child != null),
-        assert(requestState != null);
+  });
 
   final Widget child;
   final Widget errorWidget;
   final OperationState requestState;
-  final EdgeInsetsGeometry padding;
-  final Color backgroundColor;
+  final EdgeInsetsGeometry? padding;
+  final Color? backgroundColor;
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +44,7 @@ class LoadableItemView extends StatelessWidget {
       padding: padding,
       color: backgroundColor ?? Colors.white,
       child: Center(
-        child: errorWidget ?? const SizedBox(),
+        child: errorWidget,
       ),
     );
   }

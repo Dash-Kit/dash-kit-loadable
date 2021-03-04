@@ -2,19 +2,18 @@ import 'package:flutter/material.dart';
 
 class LoadableView extends StatelessWidget {
   const LoadableView({
-    @required this.child,
-    @required this.isLoading,
+    required this.child,
+    required this.isLoading,
     this.padding,
     this.backgroundColor = Colors.white,
     this.indicatorColor,
-  })  : assert(child != null),
-        assert(isLoading != null);
+  });
 
   final Widget child;
   final bool isLoading;
-  final EdgeInsetsGeometry padding;
+  final EdgeInsetsGeometry? padding;
   final Color backgroundColor;
-  final Animation<Color> indicatorColor;
+  final Animation<Color>? indicatorColor;
 
   @override
   Widget build(BuildContext context) {

@@ -5,11 +5,11 @@ import 'package:dash_kit_loadable/src/loadable_list_view.dart';
 class LoadablePaginatedListView<T extends StoreListItem>
     extends LoadableListView<T> {
   const LoadablePaginatedListView({
-    Key key,
-    @required LoadablePaginatedListViewModel<T> viewModel,
+    required LoadablePaginatedListViewModel<T> viewModel,
+    Key? key,
     ScrollPhysics scrollPhysics = const AlwaysScrollableScrollPhysics(),
-    double cacheExtent,
-    void Function(double offset) onChangeContentOffset,
+    double? cacheExtent,
+    void Function(double offset)? onChangeContentOffset,
   }) : super(
           key: key,
           viewModel: viewModel,
@@ -27,7 +27,8 @@ class LoadablePaginatedListView<T extends StoreListItem>
 class LoadablePaginatedListState<T extends StoreListItem>
     extends LoadableListViewState<T> {
   @override
-  LoadablePaginatedListViewModel<T> get viewModel => widget.viewModel;
+  LoadablePaginatedListViewModel<T> get viewModel =>
+      widget.viewModel as LoadablePaginatedListViewModel<T>;
 
   @override
   void initState() {
@@ -41,7 +42,7 @@ class LoadablePaginatedListState<T extends StoreListItem>
       if (scrollController.position.pixels ==
               scrollController.position.maxScrollExtent &&
           canLoad) {
-        viewModel?.loadPage();
+        viewModel.loadPage?.call();
       }
     });
   }
@@ -70,7 +71,7 @@ class LoadablePaginatedListState<T extends StoreListItem>
 
   Widget _getProgressPageWidget(ScrollController scrollController) {
     WidgetsBinding.instance
-        .addPostFrameCallback((_) => scrollController.animateTo(
+        ?.addPostFrameCallback((_) => scrollController.animateTo(
               scrollController.position.maxScrollExtent,
               duration: const Duration(milliseconds: 100),
               curve: Curves.linear,
@@ -84,24 +85,24 @@ class LoadablePaginatedListState<T extends StoreListItem>
   }
 
   Widget _getErrorPageWidget() {
-    return viewModel.errorPageWidget ?? Container();
+    return viewModel.errorPageWidget;
   }
 }
 
 class LoadablePaginatedListViewModel<Item extends StoreListItem>
     extends LoadableListViewModel<Item> {
   LoadablePaginatedListViewModel({
-    Key key,
-    @required Widget errorWidget,
-    @required Widget emptyStateWidget,
-    @required Widget Function(int) itemBuilder,
-    @required this.paginatedList,
-    @required this.errorPageWidget,
-    VoidCallback loadList,
-    EdgeInsets padding,
+    Key? key,
+    required Widget errorWidget,
+    required Widget emptyStateWidget,
+    required Widget Function(int) itemBuilder,
+    required Widget Function(int) itemSeparator,
+    required this.paginatedList,
+    required this.errorPageWidget,
+    VoidCallback? loadList,
+    EdgeInsets? padding,
     this.loadPage,
-  })  : assert(paginatedList != null),
-        super(
+  }) : super(
           items: paginatedList.items,
           loadListRequestState: paginatedList.loadListRequestState,
           itemBuilder: itemBuilder,
@@ -110,9 +111,10 @@ class LoadablePaginatedListViewModel<Item extends StoreListItem>
           emptyStateWidget: emptyStateWidget,
           padding: padding,
           key: key,
+          itemSeparator: itemSeparator,
         );
 
-  final VoidCallback loadPage;
+  final VoidCallback? loadPage;
   final PaginatedList<Item> paginatedList;
   final Widget errorPageWidget;
 

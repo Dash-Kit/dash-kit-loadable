@@ -3,8 +3,8 @@ import 'package:dash_kit_core/dash_kit_core.dart';
 
 class LoadableListView<T extends StoreListItem> extends StatefulWidget {
   const LoadableListView({
-    Key key,
-    @required this.viewModel,
+    Key? key,
+    required this.viewModel,
     this.scrollPhysics = const AlwaysScrollableScrollPhysics(),
     this.onChangeContentOffset,
     this.cacheExtent,
@@ -12,8 +12,8 @@ class LoadableListView<T extends StoreListItem> extends StatefulWidget {
 
   final LoadableListViewModel<T> viewModel;
   final ScrollPhysics scrollPhysics;
-  final void Function(double offset) onChangeContentOffset;
-  final double cacheExtent;
+  final void Function(double offset)? onChangeContentOffset;
+  final double? cacheExtent;
 
   @override
   State<StatefulWidget> createState() {
@@ -25,13 +25,14 @@ class LoadableListViewState<T extends StoreListItem>
     extends State<LoadableListView> {
   final ScrollController scrollController = ScrollController();
 
-  LoadableListViewModel<T> get viewModel => widget.viewModel;
+  LoadableListViewModel<T> get viewModel =>
+      widget.viewModel as LoadableListViewModel<T>;
 
   @override
   void initState() {
     super.initState();
-    if (viewModel?.loadList != null && viewModel.loadListRequestState.isIdle) {
-      viewModel?.loadList();
+    if (viewModel.loadListRequestState.isIdle) {
+      viewModel.loadList?.call();
     }
 
     scrollController.addListener(() {
@@ -81,11 +82,11 @@ class LoadableListViewState<T extends StoreListItem>
   }
 
   Widget buildErrorState() {
-    return viewModel.errorWidget ?? Container();
+    return viewModel.errorWidget;
   }
 
   Widget buildEmptyState() {
-    return viewModel.emptyStateWidget ?? Container();
+    return viewModel.emptyStateWidget;
   }
 
   Widget getLoadingWidget() {
@@ -105,27 +106,24 @@ class LoadableListViewState<T extends StoreListItem>
 
 class LoadableListViewModel<Item extends StoreListItem> {
   const LoadableListViewModel({
-    @required this.itemBuilder,
-    @required this.itemSeparator,
-    @required this.items,
-    @required this.loadListRequestState,
-    @required this.errorWidget,
-    @required this.emptyStateWidget,
+    required this.itemBuilder,
+    required this.items,
+    required this.loadListRequestState,
+    required this.errorWidget,
+    required this.emptyStateWidget,
+    required this.itemSeparator,
     this.key,
     this.loadList,
     this.padding,
-  })  : assert(items != null),
-        assert(itemBuilder != null),
-        assert(itemSeparator != null),
-        assert(loadListRequestState != null);
+  });
 
-  final Key key;
+  final Key? key;
   final Widget errorWidget;
   final Widget emptyStateWidget;
   final Widget Function(int) itemBuilder;
   final Widget Function(int) itemSeparator;
-  final VoidCallback loadList;
-  final EdgeInsets padding;
+  final VoidCallback? loadList;
+  final EdgeInsets? padding;
   final StoreList<Item> items;
   final OperationState loadListRequestState;
 
