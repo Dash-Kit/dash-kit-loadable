@@ -61,6 +61,7 @@ class LoadableListViewState<T extends StoreListItem>
       itemCount: viewModel.itemsCount,
       controller: scrollController,
       cacheExtent: widget.cacheExtent,
+      scrollDirection: viewModel.scrollDirection,
       itemBuilder: buildListItem,
       separatorBuilder: buildSeparator,
     );
@@ -99,25 +100,26 @@ class LoadableListViewState<T extends StoreListItem>
   }
 
   Widget buildSeparator(BuildContext context, int index) {
-    return viewModel.itemSeparator(index);
+    return viewModel.itemSeparator?.call(index) ?? const SizedBox();
   }
 }
 
 class LoadableListViewModel<Item extends StoreListItem> {
   const LoadableListViewModel({
     @required this.itemBuilder,
-    @required this.itemSeparator,
     @required this.items,
     @required this.loadListRequestState,
     @required this.errorWidget,
     @required this.emptyStateWidget,
+    this.itemSeparator,
+    this.scrollDirection = Axis.vertical,
     this.key,
     this.loadList,
     this.padding,
   })  : assert(items != null),
         assert(itemBuilder != null),
-        assert(itemSeparator != null),
-        assert(loadListRequestState != null);
+        assert(loadListRequestState != null),
+        assert(scrollDirection != null);
 
   final Key key;
   final Widget errorWidget;
@@ -128,6 +130,7 @@ class LoadableListViewModel<Item extends StoreListItem> {
   final EdgeInsets padding;
   final StoreList<Item> items;
   final OperationState loadListRequestState;
+  final Axis scrollDirection;
 
   int get itemsCount => items.items.length;
 

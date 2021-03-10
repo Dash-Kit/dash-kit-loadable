@@ -99,6 +99,8 @@ class LoadablePaginatedListViewModel<Item extends StoreListItem>
     @required this.errorPageWidget,
     VoidCallback loadList,
     EdgeInsets padding,
+    Axis scrollDirection = Axis.vertical,
+    Widget Function(int) itemSeparator,
     this.loadPage,
   })  : assert(paginatedList != null),
         super(
@@ -110,6 +112,8 @@ class LoadablePaginatedListViewModel<Item extends StoreListItem>
           emptyStateWidget: emptyStateWidget,
           padding: padding,
           key: key,
+          itemSeparator: itemSeparator,
+          scrollDirection: scrollDirection,
         );
 
   final VoidCallback loadPage;
