@@ -1,3 +1,7 @@
+## [2.0.3]
+
+* Added loadable item view
+
 ## [2.0.2]
 
 * Fixed issues with nullable separator
