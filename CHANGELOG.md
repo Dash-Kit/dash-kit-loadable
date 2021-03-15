@@ -1,3 +1,7 @@
+## [2.1.0]
+
+* Updated dependecies
+
 ## [2.0.3]
 
 * Added loadable item view
